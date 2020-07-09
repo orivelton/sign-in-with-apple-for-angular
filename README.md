@@ -73,5 +73,5 @@ document.addEventListener('AppleIDSignInOnFailure', (error) => {
 
 Font: 
 
-https://apple.co/2O6LEx9
-https://bit.ly/38HB2yr
+- https://apple.co/2O6LEx9
+- https://bit.ly/38HB2yr
