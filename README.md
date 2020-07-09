@@ -70,8 +70,8 @@ document.addEventListener('AppleIDSignInOnFailure', (error) => {
 });
 ```
 
-
 Font: 
 
-- https://apple.co/2O6LEx9
-- https://bit.ly/38HB2yr
+- https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js/configuring_your_webpage_for_sign_in_with_apple
+
+- https://medium.com/shopstyle-engineering/sign-in-with-apple-for-angular-8-and-nodejs-server-f37e6a81545a
