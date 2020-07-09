@@ -1,27 +1,77 @@
-# SignInWithApple
+# Sign In with Apple for Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
+Sign in with Apple provides a fast, private way to sign into apps and websites, giving people a consistent experience they can trust and the convenience of not having to remember multiple accounts and passwords.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Configuring Your Webpage for Sign in with Apple
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1 - Embed Sign in with Apple JS in Your Webpage
 
-## Build
+```html
+<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2 - Setting the authorization object using the JavaScript APIs and display a Sign in with Apple button
+```html
+<script type="text/javascript">
+    AppleID.auth.init({
+        clientId : '[CLIENT_ID]',
+        scope : '[SCOPES]',
+        redirectURI : '[REDIRECT_URI]',
+        state : '[STATE]',
+        usePopup : true //or false defaults to false
+    });
+</script>
+```
 
-## Running unit tests
+3 - Add button, recommend we to follow [Apple’s guidelines](https://apple.co/2BJmMJB) as they provide a comprehensive documentation on this matter.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```html
+<div id="appleid-signin" data-color="black" data-border="true" data-type="sign in"></div>
+```
 
-## Running end-to-end tests
+![alt text](https://apple.co/3e9xDJX "Buttom Sign In with Apple")
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+4 - Handle the Authorization Response
 
-## Further help
+The HTTP body contains the result parameters with a content-type of application/x-www-form-urlencoded. A successful response contains the following parameters:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+> code
+
+A single-use authentication code that is valid for five minutes.
+
+> id_token
+
+A JSON web token containing the user’s identify information.
+
+> state
+
+The state passed by the init function.
+
+> user
+
+A JSON string containing the data requested in the scope property. The returned data is in the following format: 
+```json
+{ "name": { "firstName": string, "lastName": string }, "email": string }
+```
+
+To handle the response, add an event listener:
+
+```javascript
+//Listen for authorization success
+document.addEventListener('AppleIDSignInOnSuccess', (data) => {
+     //handle successful response
+});
+
+//Listen for authorization failures
+document.addEventListener('AppleIDSignInOnFailure', (error) => {
+     //handle error.
+});
+```
+
+
+Font: 
+
+https://apple.co/2O6LEx9
+https://bit.ly/38HB2yr
